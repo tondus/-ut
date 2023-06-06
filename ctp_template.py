@@ -170,7 +170,7 @@ def get_payload(dir_path):
 def add_figure(program,condition_no,condition_desc,expected_result,figure_title,wb,fig_titles):
     start = 7
     line_height = 17
-    
+    ft = Font(name='Leelawadee', size=10)
     figure_template = wb['Figure'] 
     new_sheet = wb.copy_worksheet(figure_template)
     new_sheet.title = figure_title
@@ -199,11 +199,12 @@ def add_figure(program,condition_no,condition_desc,expected_result,figure_title,
                     upper = token[0]
                     lower = token[1]
                     new_sheet['B'+str(start)].value = upper.strip()
-                    new_sheet['B'+str(start)].font = Font(bold=True)
+                    new_sheet['B'+str(start)].font = Font(bold=True,name='Leelawadee', size=10)
                     new_sheet['B'+str(start+1)].value = lower.strip()
                     start += 4
                 else:
                     new_sheet['B'+str(start)].value = title.strip()
+                    new_sheet['B'+str(start)].font = ft
                     start += 3
                  
         last_line = add_image_to_sheet(image_path,image,new_sheet,start,line_height)
@@ -215,6 +216,7 @@ def add_figure(program,condition_no,condition_desc,expected_result,figure_title,
         token = payload.split('\n')
         for line in token:
             new_sheet['B'+str(start)].value = line
+            new_sheet['B'+str(start)].font = ft
             start += 1
     
 def get_program_date(program_date):

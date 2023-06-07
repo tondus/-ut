@@ -64,7 +64,7 @@ def replace_cover(program,ws):
     replace(ws,"<ricefw_id>",str(program['ricefw_id']))
     replace(ws,"<ricefw_name>",str(program['ricefw_name']))
     replace(ws,"<document_owner>",str(program['document_owner']))
-    replace(ws,"<date>",get_program_date(program['date']).strftime("%Y.%m.%d"))
+    replace(ws,"<date>",get_program_date(program['date']).strftime("%d.%m.%Y"))
 
 def replace_ctp(program,ws):
     replace(ws,"<ricefw_id>",program['ricefw_id'])

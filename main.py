@@ -20,6 +20,7 @@ import shutil
 import pydash
 import ctp_template as ctp
 from pathlib import Path
+import configparser
 
 
 col_ricefw_id = 'ricefw_id'
@@ -138,8 +139,9 @@ def generate_images_folder(program,path):
                 if not os.path.isdir(full_path):
                     os.makedirs(full_path)
 
-def adjust_image_size(image_dir):
-    resize = " 50% "
+def adjust_image_size(image_dir,config):
+    resize = " "+str(config['DEFAULT']['ImageSize']) +"% "
+    # resize = " 80% "
     p = 'source/image_magick/'
     if os.path.isdir(p):
         shutil.rmtree(p)
@@ -169,12 +171,14 @@ def copy_images_to_result(root_path,user_dir):
         shutil.copytree(local_images_path, result_images_path)
     
 def main() -> int:
+    config = configparser.ConfigParser()
+    config.read('config.ini')
     df = pd.read_excel('source/OREO.xlsx')
     column_headers = list(df.columns.values)
     df_master = fill_up_dataframe(df,column_headers)
     data = create_structure(df_master,column_headers)
     generate_images_folder(data,'source/images/')
-    adjust_image_size('source/images/')
+    adjust_image_size('source/images/',config)
     ctp.create_document(data)
                     
 if __name__ == '__main__':

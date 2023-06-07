@@ -201,10 +201,11 @@ def add_figure(program,condition_no,condition_desc,expected_result,figure_title,
                     new_sheet['B'+str(start)].value = upper.strip()
                     new_sheet['B'+str(start)].font = Font(bold=True,name='Leelawadee', size=10)
                     new_sheet['B'+str(start+1)].value = lower.strip()
+                    new_sheet['B'+str(start+1)].font = Font(name='Leelawadee', size=10)
                     start += 4
                 else:
                     new_sheet['B'+str(start)].value = title.strip()
-                    new_sheet['B'+str(start)].font = ft
+                    new_sheet['B'+str(start)].font = Font(name='Leelawadee', size=10)
                     start += 3
                  
         last_line = add_image_to_sheet(image_path,image,new_sheet,start,line_height)

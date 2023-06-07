@@ -99,23 +99,22 @@ def write_ctp_table(program,ws,wb,filename):
        
 
         ws['A'+str(start_line)].value = condition_no
-        ws['A'+str(start_line)].alignment  = Alignment(horizontal='center')
+        ws['A'+str(start_line)].alignment  = Alignment(horizontal='center',vertical="center")
         ws['A'+str(start_line)].border  = thin_border
         
         ws['B'+str(start_line)].value = condition_desc
-        ws['B'+str(start_line)].alignment  = Alignment(horizontal='left')
+        ws['B'+str(start_line)].alignment  = Alignment(horizontal='left',vertical="center")
         ws['B'+str(start_line)].font  = ft
         ws['B'+str(start_line)].border  = thin_border
         
-        
         for step in steps:
             ws['D'+str(start_line)].value = step['expected_result']
-            ws['D'+str(start_line)].alignment  = Alignment(horizontal='left')
+            ws['D'+str(start_line)].alignment  = Alignment(horizontal='left',vertical="center")
             ws['D'+str(start_line)].font  = ft
             ws['D'+str(start_line)].border  = thin_border
 
             ws['E'+str(start_line)].value = step['pass_fail']
-            ws['E'+str(start_line)].alignment  = Alignment(horizontal='center')
+            ws['E'+str(start_line)].alignment  = Alignment(horizontal='center' ,vertical="center")
             ws['E'+str(start_line)].border  = thin_border
             ws['E'+str(start_line)].font  = ft
             if str(step['pass_fail']).lower() == 'pass':

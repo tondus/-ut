@@ -239,7 +239,8 @@ def create_document(data):
         wb = openpyxl.load_workbook(template_path)
         program = data[key]
         output_path = prepare_folder(program)
-        filename = 'OREO_CTP_'+program['ricefw_id']+" "+ program['ricefw_name']+ '_' + get_program_date(program['date']).strftime("%Y%m%d")+'.xlsx'
+        # filename = 'OREO_PIPO_CTP_'+program['ricefw_id']+" "+ program['ricefw_name']+ '_'   +  get_program_date(program['date']).strftime("%Y%m%d")+'.xlsx'
+        filename = 'OREO_PIPO_CTP_'+program['ricefw_id']+" "+ program['ricefw_name']+ '_V1.0.0.xlsx'
         replace_cover(program,wb['Cover Sheet'])
         replace_ctp(program,wb['CTP'])
         write_ctp_table(program,wb['CTP'],wb,filename)

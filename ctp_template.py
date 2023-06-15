@@ -168,7 +168,7 @@ def get_payload(dir_path):
                    
 def add_figure(program,condition_no,condition_desc,expected_result,figure_title,wb,fig_titles,config):
     start = 7
-    line_height = config['DEFAULT']['LineHight']
+    line_height = int(config['DEFAULT']['LineHight'])
     ft = Font(name='Leelawadee', size=10)
     figure_template = wb['Figure'] 
     new_sheet = wb.copy_worksheet(figure_template)

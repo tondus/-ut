@@ -76,7 +76,7 @@ def replace_ctp(program,ws):
 
     replace(ws,"<document_owner>",short_name)
 
-def write_ctp_table(program,ws,wb,filename):
+def write_ctp_table(program,ws,wb,filename,config):
     thin_border = Border(left=Side(style='thin'), 
                      right=Side(style='thin'), 
                      top=Side(style='thin'), 
@@ -137,7 +137,7 @@ def write_ctp_table(program,ws,wb,filename):
                           step['fig_title3'],
                           step['fig_title4'],
                           step['fig_title5']]
-            add_figure(program,condition_no,condition_desc,step['expected_result'],'Figure '+str(figure_index),wb,fig_titles)
+            add_figure(program,condition_no,condition_desc,step['expected_result'],'Figure '+str(figure_index),wb,fig_titles,config)
 
             start_line += 1
             figure_index += 1
@@ -166,9 +166,9 @@ def get_payload(dir_path):
                 t.close()
     return payload
                    
-def add_figure(program,condition_no,condition_desc,expected_result,figure_title,wb,fig_titles):
+def add_figure(program,condition_no,condition_desc,expected_result,figure_title,wb,fig_titles,config):
     start = 7
-    line_height = 17
+    line_height = config['DEFAULT']['LineHight']
     ft = Font(name='Leelawadee', size=10)
     figure_template = wb['Figure'] 
     new_sheet = wb.copy_worksheet(figure_template)
@@ -232,7 +232,7 @@ def prepare_folder(program):
         os.mkdir(output_path_group)
     return output_path_group    
 
-def create_document(data):
+def create_document(data,config):
     template_path = 'template/template_ctp.xlsx'
     for key in data.keys():
         print(key)
@@ -243,7 +243,7 @@ def create_document(data):
         filename = 'OREO_PIPO_CTP_'+program['ricefw_id']+" "+ program['ricefw_name']+ '_V1.0.0.xlsx'
         replace_cover(program,wb['Cover Sheet'])
         replace_ctp(program,wb['CTP'])
-        write_ctp_table(program,wb['CTP'],wb,filename)
+        write_ctp_table(program,wb['CTP'],wb,filename,config)
         
         wb.remove(wb["Figure"])
         wb.active = 1

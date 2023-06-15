@@ -179,7 +179,7 @@ def main() -> int:
     data = create_structure(df_master,column_headers)
     generate_images_folder(data,'source/images/')
     adjust_image_size('source/images/',config)
-    ctp.create_document(data)
+    ctp.create_document(data,config)
                     
 if __name__ == '__main__':
     sys.exit(main())

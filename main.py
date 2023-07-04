@@ -18,7 +18,7 @@ from os import walk
 import math
 import shutil
 import pydash
-import ctp_template as ctp
+import src.lib.ctp_template as ctp
 from pathlib import Path
 import configparser
 

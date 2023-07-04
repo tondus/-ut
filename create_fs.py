@@ -148,7 +148,7 @@ def clear_onedrive(p):
 def main() -> int:
     clear_files_in_path('output/fs')
     config = configparser.ConfigParser()
-    config.read('config.ini')
+    config.read('config_fs.ini')
     df = pd.read_excel('source/fs_legacy.xlsx')
     column_headers = list(df.columns.values)
     df_master= fill_up_dataframe(df,column_headers)

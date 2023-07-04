@@ -34,6 +34,7 @@ col_inbound = 'inbound'
 col_outbound = 'outbound'
 col_synchronous = 'synchronous'
 col_asynchronus = 'asynchronus'
+col_sftp_path = 'sftp_path'
 
 img_tas_outbound = 'tas_outbound.png'
 img_tas_inbound = 'tas_inbound.png'
@@ -43,6 +44,7 @@ checkbox_unchecked = "\u2610"
 checkbox_items = [col_odata,col_proxy,col_rfc,col_other1,col_cpi,col_pi,col_other2,col_inbound,col_outbound,col_synchronous,col_asynchronus]
 root_images = ROOT_DIR+'/src/template/images/'
 img_file_transfer = 'file_transfer'
+img_file_transfer_sftp = 'file_transfer_sftp'
 
 def get_config():
     config = configparser.ConfigParser()
@@ -131,6 +133,8 @@ def get_template_name(data):
     name = None
     if "tas" in data[col_source_system].lower() or "tas" in data[col_target_system].lower():
         name  = 'tas'
+    elif "sftp_path" in data.keys():
+        name = 'file_transfer_sftp'
     elif "file" in str(data[col_other1]).lower():
         name = 'file_transfer'
     elif 'HR' in data[col_source_system].upper() or 'HR' in data[col_target_system].upper():

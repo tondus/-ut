@@ -32,6 +32,7 @@ col_inbound = 'inbound'
 col_outbound = 'outbound'
 col_synchronous = 'synchronous'
 col_asynchronus = 'asynchronus'
+col_sftp_path = 'sftp_path'
 
 def sxx():
     doc = Document('source/OREO_FD_SD_ZPISDI003.docx')
@@ -86,6 +87,43 @@ def create_structure(df_master,column_headers):
                  'outbound' :  True if str(row[col_outbound]).strip().lower() == "x" else False ,
                  'synchronous' :  True if str(row[col_synchronous]).strip().lower() == "x" else False ,
                  'asynchronus' :  True if str(row[col_asynchronus]).strip().lower() == "x" else False ,
+             }
+        key = row[col_ricef]+"_"+row[col_ut_description]
+        key = key.replace(" ","_")
+        
+        if key in result:
+            t = result[key]['tables']
+            t.append(table)
+        else:
+            result[key] = {"ricef": row[col_ricef],
+                           "tables" : [table]}
+    return result
+
+def de_structure_sftp_path(token):
+    if not pd.isna(token):
+        return token.split(',')
+    else:
+        return []
+
+def create_structure_filetransfer(df_master,column_headers):
+    result = {}
+    for idx , row in df_master.iterrows():
+        table = {'source_system' : row[col_source_system],
+                 'target_system' : row[col_target_system],
+                 'ricef' : row[col_ricef],
+                 'ut_description' : row[col_ut_description],
+                 'odata' :  True if str(row[col_odata]).strip().lower() == "x" else False ,
+                 'proxy' :  True if str(row[col_proxy]).strip().lower() == "x" else False ,
+                 'rfc' :  True if str(row[col_rfc]).strip().lower() == "x" else False ,
+                 'other1':  row[col_other1], 
+                 'cpi' :  True if str(row[col_cpi]).strip().lower() == "x" else False ,
+                 'pi' :  True if str(row[col_pi]).strip().lower() == "x" else False ,
+                 'other2' :  row[col_other2], 
+                 'inbound' :  True if str(row[col_inbound]).strip().lower() == "x" else False ,
+                 'outbound' :  True if str(row[col_outbound]).strip().lower() == "x" else False ,
+                 'synchronous' :  True if str(row[col_synchronous]).strip().lower() == "x" else False ,
+                 'asynchronus' :  True if str(row[col_asynchronus]).strip().lower() == "x" else False ,
+                 'sftp_path' : de_structure_sftp_path(row[col_sftp_path])
              }
         key = row[col_ricef]+"_"+row[col_ut_description]
         key = key.replace(" ","_")
@@ -158,6 +196,17 @@ def main() -> int:
         ricefw = data[key]
         print(key)
         fs_legz.create_document('template/OREO_LEGACY_ONLY_TABLE.docx',ricefw,config,key)
-                    
+
+    if os.path.exists("source/fs_filetransfer.xlsx"):
+        df = pd.read_excel('source/fs_filetransfer.xlsx')
+        column_headers = list(df.columns.values)
+        df_master= fill_up_dataframe(df,column_headers)
+        data = create_structure_filetransfer(df_master,column_headers)
+        for key in data.keys():
+            ricefw = data[key]
+            print(key)
+            fs_legz.create_document('template/OREO_LEGACY_ONLY_TABLE.docx',ricefw,config,key)
+
+
 if __name__ == '__main__':
     sys.exit(main())

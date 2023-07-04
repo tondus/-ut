@@ -19,6 +19,7 @@ import pandas as pd
 import src.template.hr.hr as hr
 import src.template.bw.bw as bw
 import src.template.filetransfer.file_transfer as ft
+import src.template.filetransfer_sftp.filetransfer_sftp as ft_sftp
 from src.lib.template import *
  
 
@@ -92,7 +93,6 @@ def create_document(filename,data,config,ricefw) -> int:
     pic = None
     for i in reversed(range(0, len(data['tables']))) :
         d = data['tables'][i]
-        
         match get_template_name(data['tables'][i]):
             case "tas":
                 pic,text= tas.get_pic(d)
@@ -106,6 +106,9 @@ def create_document(filename,data,config,ricefw) -> int:
             case "file_transfer":
                 pic,text = ft.get_pic(d,config)
                 table =  ft.add_data_to_table(copy.deepcopy(table_interface),d,config,ricefw,pic,text)
+            case "file_transfer_sftp":
+                pic,text = ft_sftp.get_pic(d,config)
+                table =  ft_sftp.add_data_to_table(copy.deepcopy(table_interface),d,config,ricefw,pic,text)
             case _:
                 pic,text = leg.get_pic(d,config)
                 table =  leg.add_data_to_table(copy.deepcopy(table_interface),d,config,ricefw,pic,text)

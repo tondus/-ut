@@ -20,13 +20,14 @@ def add_data_to_table(table , data ,config,ricefw,pic,text=None):
 def get_pic(data,config):
     pic = None
     text = [] 
+
     if data[col_inbound]:
-        pic =   root_images +'\\'+ img_file_transfer +'\\'+ r"\inbound.png"
+        pic =   root_images +'/'+ img_file_transfer +'/'+ "inbound.png"
         text.append(config['default']['file_transfer_inbound_line1'])
         text.append(config['default']['file_transfer_inbound_line2'])
         text.append(config['default']['file_transfer_inbound_line3'])
     else : 
-        pic =   root_images +'\\'+ img_file_transfer +'\\'+ r"\outbound.png"
+        pic =   root_images +'/'+ img_file_transfer +'/'+ "outbound.png"
         text.append(config['default']['file_transfer_outbound_line1'])
         text.append(config['default']['file_transfer_outbound_line2'])
         text.append(config['default']['file_transfer_outbound_line3'])

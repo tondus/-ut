@@ -41,7 +41,7 @@ img_tas_inbound = 'tas_inbound.png'
 checkbox_checked = "\u2612"
 checkbox_unchecked = "\u2610"
 checkbox_items = [col_odata,col_proxy,col_rfc,col_other1,col_cpi,col_pi,col_other2,col_inbound,col_outbound,col_synchronous,col_asynchronus]
-root_images =  r"C:\Developer\fs\source\images"
+root_images = ROOT_DIR+'/src/template/images/'
 img_file_transfer = 'file_transfer'
 
 def get_config():

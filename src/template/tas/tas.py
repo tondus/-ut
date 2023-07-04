@@ -24,12 +24,12 @@ def get_pic(data):
     pic = None
     text = None
     if data[col_inbound]:
-        pic = root_images + r'\tas\tas_in.png' 
+        pic = root_images + 'tas/tas_in.png' 
         text = ['•	TAS ทำการวางไฟล์ไว้ที่ Server แยกวางใน Folder ตามแต่ละ Plant',
                 '•	ESB ทำการย้ายไฟล์ไปวางที่ SFTP Server แยกวางใน Folder ตามแต่ละ Plant',
                 '•	SAP PI ทำการหยิบไฟล์ที่ SFTP Server ที่แยกวางใน Folder ตามแต่ละ Plant เพื่อทำ Mapping field call IDoc เข้า SAP S/4HANA']
     else:
-        pic = root_images + r'\tas\tas_out.png' 
+        pic = root_images + 'tas/tas_out.png' 
         text = ['•	SAP S/4HANA ทำการส่ง IDoc มายัง SAP PI',
                 '•	SAP PI ทำการ Mapping field IDoc ให้เป็น text file และวางไปที่ SFTP Server แยกวางใน Folder ตามแต่ละ Plant',
                 '•	ESB ทำการย้ายไฟล์จาก SFTP Server ไปยัง Server TAS โดยแยกวางใน Folder ตามแต่ละ Plant',

@@ -139,7 +139,7 @@ def generate_images_folder(program,path):
                 if not os.path.isdir(full_path):
                     os.makedirs(full_path)
 
-def adjust_image_size(image_dir,config):
+def adjust_image_size(image_dir,config,all_ricefw):
     resize = " "+str(config['DEFAULT']['ImageSize']) +"% "
     # resize = " 80% "
     p = 'source/image_magick/'
@@ -155,9 +155,11 @@ def adjust_image_size(image_dir,config):
                 filename = os.path.join(path, str(name))
                 filename = filename.replace('\\','/')
                 name = os.path.basename(filename)
-                if os.path.isfile(filename):
-                    Path(magick_path).mkdir(parents=True, exist_ok=True)
-                    subprocess.call(r'magick convert '+ '"'+filename +'"'+ " -resize "+resize +'"' +magick_path + name+'"', shell=True)
+                ricefw = filename.split('/')[2]
+                if ricefw in all_ricefw:
+                    if os.path.isfile(filename):
+                        Path(magick_path).mkdir(parents=True, exist_ok=True)
+                        subprocess.call(r'magick convert '+ '"'+filename +'"'+ " -resize "+resize +'"' +magick_path + name+'"', shell=True)
 
 def copy_images_to_result(root_path,user_dir):
     local_images_path = 'onedrive/'+user_dir+'/images'
@@ -169,16 +171,23 @@ def copy_images_to_result(root_path,user_dir):
         if os.path.exists(result_images_path):
             shutil.rmtree(result_images_path)
         shutil.copytree(local_images_path, result_images_path)
-    
+
+def get_ricefw(df):
+    ricefw = {}
+    for idx,row in df.iterrows():
+        ricefw[row[col_ricefw_id]] = row[col_ricefw_id]
+    return ricefw
+
 def main() -> int:
     config = configparser.ConfigParser()
     config.read('config.ini')
     df = pd.read_excel('source/OREO.xlsx')
     column_headers = list(df.columns.values)
     df_master = fill_up_dataframe(df,column_headers)
+    ricefw = get_ricefw(df_master)
     data = create_structure(df_master,column_headers)
     generate_images_folder(data,'source/images/')
-    adjust_image_size('source/images/',config)
+    adjust_image_size('source/images/',config,ricefw)
     ctp.create_document(data,config)
                     
 if __name__ == '__main__':

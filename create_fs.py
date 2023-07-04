@@ -10,7 +10,6 @@ from docx.shared import Inches
 from docx.text.paragraph import Paragraph
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
-from docxtpl import DocxTemplate
 import src.lib.fs as fs_legz
 import configparser
 import codecs
@@ -140,17 +139,20 @@ def clear_files_in_path(p):
         if  os.path.isfile(os.path.join(p, path)):
             full_path = os.path.join(p, path)
             os.remove(full_path)
+
 def clear_onedrive(p):
     for path in os.listdir(p):
         if not os.path.isfile(os.path.join(p, path)):
             shutil.rmtree(os.path.join(p, path))
+
 def main() -> int:
     clear_files_in_path('output/fs')
     config = configparser.ConfigParser()
     config.read('config.ini')
     df = pd.read_excel('source/fs_legacy.xlsx')
     column_headers = list(df.columns.values)
-    data = create_structure(df,column_headers)
+    df_master= fill_up_dataframe(df,column_headers)
+    data = create_structure(df_master,column_headers)
     
     for key in data.keys():
         ricefw = data[key]

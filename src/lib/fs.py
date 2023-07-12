@@ -93,6 +93,7 @@ def create_document(filename,data,config,ricefw) -> int:
     pic = None
     for i in reversed(range(0, len(data['tables']))) :
         d = data['tables'][i]
+        print("template",get_template_name(data['tables'][i]))
         match get_template_name(data['tables'][i]):
             case "tas":
                 pic,text= tas.get_pic(d)

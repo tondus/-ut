@@ -161,7 +161,7 @@ def get_payload(dir_path):
         if os.path.isfile(os.path.join(dir_path, path)):
             _filename, extension = os.path.splitext(path)
             if extension.lower() in text_file:
-                t = open(os.path.join(dir_path, path), "r", encoding="utf8")
+                t = open(os.path.join(dir_path, path), "r", encoding="utf-8")
                 payload = t.read()
                 t.close()
     return payload

@@ -133,6 +133,8 @@ def get_template_name(data):
     name = None
     if "tas" in data[col_source_system].lower() or "tas" in data[col_target_system].lower():
         name  = 'tas'
+    elif data[col_rfc]:
+        name = 'rfc'
     elif "sftp_path" in data.keys():
         name = 'file_transfer_sftp'
     elif "file" in str(data[col_other1]).lower():

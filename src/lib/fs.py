@@ -18,6 +18,7 @@ import src.template.legacy.legacy as leg
 import pandas as pd
 import src.template.hr.hr as hr
 import src.template.bw.bw as bw
+import src.template.rfc.rfc as rfc
 import src.template.filetransfer.file_transfer as ft
 import src.template.filetransfer_sftp.filetransfer_sftp as ft_sftp
 from src.lib.template import *
@@ -98,6 +99,9 @@ def create_document(filename,data,config,ricefw) -> int:
             case "tas":
                 pic,text= tas.get_pic(d)
                 table = tas.add_data_to_table(copy.deepcopy(table_interface),d,config,ricefw,pic,text)
+            case "rfc":
+                pic,text = rfc.get_pic(d,config)
+                table =  rfc.add_data_to_table(copy.deepcopy(table_interface),d,config,ricefw,pic,text)
             case "hr":
                 pic,text = hr.get_pic(d,config)
                 table =  hr.add_data_to_table(copy.deepcopy(table_interface),d,config,ricefw,pic,text)

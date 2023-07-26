@@ -52,13 +52,6 @@ def get_pic(data,config):
         else:
             pic = root_images +'/'+ img_file_transfer_sftp +'/bw/'+ "outbound.jpg"
             text = get_outbound_text(data[col_sftp_path],'SAP BW/4HANA')
-    elif "S/4HANA" in data[col_source_system] or "S/4HANA" in data[col_target_system]:
-        if data[col_inbound]:
-            pic = root_images +'/'+ img_file_transfer_sftp +'/hana/'+ "inbound.jpg"
-            text = get_inbound_text(data[col_sftp_path],'SAP S/4HANA')
-        else:
-            pic = root_images +'/'+ img_file_transfer_sftp +'/hana/'+ "outbound.jpg"
-            text = get_outbound_text(data[col_sftp_path],'SAP S/4HANA')
     elif "HR" in data[col_source_system] or "HR" in data[col_target_system]:
         if data[col_inbound]:
             pic = root_images +'/'+ img_file_transfer_sftp +'/hr/'+ "inbound.jpg"
@@ -66,5 +59,13 @@ def get_pic(data,config):
         else:
             pic = root_images +'/'+ img_file_transfer_sftp +'/hr/'+ "outbound.jpg"
             text = get_outbound_text(data[col_sftp_path],'SAP S/4HANA (HR)')
+    elif "S/4HANA" in data[col_source_system] or "S/4HANA" in data[col_target_system]:
+        if data[col_inbound]:
+            pic = root_images +'/'+ img_file_transfer_sftp +'/hana/'+ "inbound.jpg"
+            text = get_inbound_text(data[col_sftp_path],'SAP S/4HANA')
+        else:
+            pic = root_images +'/'+ img_file_transfer_sftp +'/hana/'+ "outbound.jpg"
+            text = get_outbound_text(data[col_sftp_path],'SAP S/4HANA')
+   
     
     return pic , text

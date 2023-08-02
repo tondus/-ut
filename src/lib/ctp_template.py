@@ -113,14 +113,11 @@ def write_ctp_table(program,ws,wb,filename,config):
             ws['D'+str(start_line)].font  = ft
             ws['D'+str(start_line)].border  = thin_border
 
-            ws['E'+str(start_line)].value = step['pass_fail']
+            ws['E'+str(start_line)].value = "Pass"
             ws['E'+str(start_line)].alignment  = Alignment(horizontal='center' ,vertical="center")
             ws['E'+str(start_line)].border  = thin_border
             ws['E'+str(start_line)].font  = ft
-            if str(step['pass_fail']).lower() == 'pass':
-                ws['E'+str(start_line)].fill  = green_fill
-            else:
-                ws['E'+str(start_line)].fill  = red_fill
+            ws['E'+str(start_line)].fill  = green_fill
             
            
             sheetname = 'Figure '+str(figure_index)

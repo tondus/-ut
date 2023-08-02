@@ -69,7 +69,6 @@ def column_to_path(columns):
 
 def get_new_step(row):
     return {'expected_result':row[col_expected_result],
-                           'pass_fail':row[col_pass_fail],
                            'fig_title1':row[col_fig_title1],
                            'fig_title2':row[col_fig_title2],
                            'fig_title3':row[col_fig_title3],
